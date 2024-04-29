@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather App</title>
+</head>
+<body>
+    <h1>Weather App</h1>
+    <form method="post">
+        <label for="city">Select a city:</label>
+        <select name="city" id="city">
+            {% for city in cities %}
+            <option value="{{ city }}">{{ city }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Get Weather</button>
+    </form>
+
+    {% if selected_city %}
+    <h2>{{ selected_city }}</h2>
+    <img src="{{ url_for('static', filename=cities[selected_city]['image']) }}" alt="{{ selected_city }}">
+    <p>Temperature: {{ temperature }} °F</p>
+    {% endif %}
+</body>
+</html>
