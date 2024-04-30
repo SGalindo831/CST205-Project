@@ -22,8 +22,9 @@ UNSPLASH_API_URL = "https://api.unsplash.com/search/photos"
 # List of cities for random selection
 CITIES = ["New York", "London", "Tokyo", "Sydney", "Paris", "Berlin", "Moscow", "Los Angeles", "Rio de Janeiro", "Cape Town"]
 
+"""Applies a color map based on temperature."""
 def apply_temperature_based_filter(image, temp):
-    """Applies a color map based on temperature."""
+
     image_cv = np.array(image)
 
     image_cv = cv2.cvtColor(image_cv, cv2.COLOR_RGB2BGR)
