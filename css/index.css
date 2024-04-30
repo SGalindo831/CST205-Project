@@ -1,0 +1,10 @@
+.container {
+    background-color: #f8f9fa; /* Light background color */
+    padding: 20px; /* Add some padding */
+    border-radius: 10px; /* Rounded corners */
+}
+
+.current-weather img,
+.forecast-item img {
+    margin-bottom: 10px; /* Add space below icons */
+}

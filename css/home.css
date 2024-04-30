@@ -1,0 +1,22 @@
+body {
+    background-color: #181818; /* Dark background */
+    color: #FFFFFF; /* Light text */
+}
+
+h1 {
+    font-family: 'Arial', sans-serif; /* Google-like font */
+    font-size: 3rem; /* Large font size */
+    text-align: center; /* Center-align heading */
+}
+
+form {
+    margin-top: 30px; /* Space between heading and form */
+}
+
+.form-control {
+    font-size: 1.2rem; /* Slightly larger font size for the input */
+}
+
+button {
+    font-size: 1rem; /* Consistent button font size */
+}
