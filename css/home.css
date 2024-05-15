@@ -29,10 +29,4 @@ button {
     font-size: 16px;
     cursor: pointer;
 
-    /* put in index.html    <button class="Home-button"><a href="home.html">Home</a></button> */
 }
-
-/* to center weather in city {name} can use vertical-align property 
-    <img style="vertical-align: middle;" src="data:image/jpeg;base64,{{ image }}" alt="City Image">
-    <span>Weather in {{ city_name }}</span>
-*/

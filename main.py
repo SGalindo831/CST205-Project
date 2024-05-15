@@ -22,25 +22,30 @@ UNSPLASH_API_URL = "https://api.unsplash.com/search/photos"
 # List of cities for random selection
 CITIES = ["New York", "London", "Tokyo", "Sydney", "Paris", "Berlin", "Moscow", "Los Angeles", "Rio de Janeiro", "Cape Town"]
 
-"""Applies a color map based on temperature."""
-def apply_temperature_based_filter(image, temp):
+# """Applies a color map based on temperature."""
+def custom_temperature_filter(image, temp):
 
     image_cv = np.array(image)
 
     image_cv = cv2.cvtColor(image_cv, cv2.COLOR_RGB2BGR)
 
-    if temp >= 78:
+    if temp > 78:
         color_map = cv2.COLORMAP_HOT
-    elif temp >= 50:
-        color_map = cv2.COLORMAP_COOL
-    elif temp >= 32:
+    elif temp >= 65 and temp <= 77:
+        color_map = None
+    elif temp <= 64:
         color_map = cv2.COLORMAP_WINTER
-    else:
-        color_map = cv2.COLORMAP_BONE
 
-    filtered_image = cv2.applyColorMap(image_cv, color_map)
+    if color_map is not None:
+        filtered_image = cv2.applyColorMap(image_cv, color_map)
+    else:
+        filtered_image = image_cv
+
     filtered_image = cv2.cvtColor(filtered_image, cv2.COLOR_BGR2RGB)
     return Image.fromarray(filtered_image)
+
+def apply_temperature_based_filter(image, temp):
+    return custom_temperature_filter(image, temp)
 
 """Encodes an image to base64 format."""
 def encode_image_to_base64(image):
@@ -102,13 +107,16 @@ def home():
 
         # Load the image as a PIL object directly from the URL
         image_response = requests.get(image_url, stream=True)
-        image = Image.open(image_response.raw)
+        original_image = Image.open(image_response.raw)
 
         # Apply a color map filter based on temperature
-        filtered_image = apply_temperature_based_filter(image, temperature)
+        filtered_image = apply_temperature_based_filter(original_image, temperature)
 
-        # Encode it to a base64 string for rendering
-        encoded_image = encode_image_to_base64(filtered_image)
+        # Encode the original image to a base64 string for rendering
+        encoded_original_image = encode_image_to_base64(original_image)
+
+        # Encode the filtered image to a base64 string for rendering
+        encoded_filtered_image = encode_image_to_base64(filtered_image)
 
         # Fetch forecast data
         forecast_response = requests.get(FORECAST_API_URL, params=params)
@@ -125,10 +133,16 @@ def home():
         return render_template(
             'index.html', city_name=city_name, temperature=temperature,
             weather_description=weather_description, weather_icon=weather_icon,
-            local_time=local_time, forecast_for_next_day=forecast_for_next_day, image=encoded_image
+            local_time=local_time, forecast_for_next_day=forecast_for_next_day,
+            image=encoded_original_image, filtered_image=encoded_filtered_image
         )
 
     return render_template('home.html')
 
+@app.route('/home.html')
+def home_page():
+    return render_template('home.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
+    
