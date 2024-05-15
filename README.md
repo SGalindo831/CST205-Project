@@ -20,11 +20,16 @@ git clone https://github.com/SGalindo831/CST205-Project.git
 ### 2. Navigate to the Project Directory
 
 ### 3. Install Required Packages
+Before running the application, you need to install the necessary Python packages. Ensure you have Python installed, then install the packages using pip:
+
 pip install Flask requests Pillow opencv-python numpy
 
 ### 4. Run the Application
+Finally, you can start the server by running the main application file:
+
 python main.py
 
+This will start a local server, typically accessible via http://localhost:5000 in your web browser, where you can interact with the weather site.
 
 ## Useful Links
 - [GitHub Repository](https://github.com/SGalindo831/CST205-Project)
