@@ -10,34 +10,31 @@
         {% if error %}
             <p>{{ error }}</p>
         {% else %}
-            <h1>Weather in {{ city_name }}</h1>
-            <img src="data:image/jpeg;base64,{{ image }}" alt="City Image" class="mb-4">
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="current-weather text-center mb-4">
-                        <h2>Current Weather</h2>
-                        <p>Local Time: {{ local_time }}</p>
-                        <p>Temperature: {{ temperature }}°F</p>
-                        <p>Condition: {{ weather_description }}</p>
-                        <img src="http://openweathermap.org/img/wn/{{ weather_icon }}@2x.png" alt="Weather Icon">
-                    </div>
+            <div class="weather-card">
+                <h1 class="text-center">Weather in {{ city_name }}</h1>
+                <div class="image-container mb-4">
+                    <img src="data:image/jpeg;base64,{{ filtered_image }}" alt="City Image" class="img-fluid">
                 </div>
-
-                <div class="col-md-6">
+                <div class="current-weather text-center mb-4">
+                    <h2>Current Weather</h2>
+                    <p>Local Time: {{ local_time }}</p>
+                    <p>Temperature: {{ temperature }}°F</p>
+                    <p>Condition: {{ weather_description }}</p>
+                    <img src="http://openweathermap.org/img/wn/{{ weather_icon }}@2x.png" alt="Weather Icon">
+                </div>
+                <div class="forecast">
+                    <h2>Tomorrow's Weather</h2>
                     {% if forecast_for_next_day %}
-                        <div class="forecast">
-                            <h2>Tomorrow's Weather</h2>
-                            {% set first_forecast = forecast_for_next_day[0] %}
-                            <div class="forecast-item">
-                                <p>Time: {{ first_forecast["dt_txt"] }}</p>
-                                <p>Temperature: {{ first_forecast['main']['temp'] }}°F</p>
-                                <p>Condition: {{ first_forecast['weather'][0]['description'] }}</p>
-                                <img src="http://openweathermap.org/img/wn/{{ first_forecast['weather'][0]['icon'] }}@2x.png" alt="Weather Icon">
-                            </div>
+                        {% set first_forecast = forecast_for_next_day[0] %}
+                        <div class="forecast-item text-center">
+                            <p>Time: {{ first_forecast["dt_txt"] }}</p>
+                            <p>Temperature: {{ first_forecast['main']['temp'] }}°F</p>
+                            <p>Condition: {{ first_forecast['weather'][0]['description'] }}</p>
+                            <img src="http://openweathermap.org/img/wn/{{ first_forecast['weather'][0]['icon'] }}@2x.png" alt="Weather Icon">
                         </div>
                     {% endif %}
                 </div>
+                <a href="home.html" class="btn btn-primary home-button">Home</a>
             </div>
         {% endif %}
     </div>
