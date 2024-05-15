@@ -12,6 +12,19 @@
 
 
 ## How to Run the Program
+Follow these steps to get the weather site up and running on your local machine:
+
+### 1. Clone the Repository
+git clone https://github.com/SGalindo831/CST205-Project.git
+
+### 2. Navigate to the Project Directory
+
+### 3. Install Required Packages
+pip install Flask requests Pillow opencv-python numpy
+
+### 4. Run the Application
+python main.py
+
 
 ## Useful Links
 - [GitHub Repository](https://github.com/SGalindo831/CST205-Project)
