@@ -1,3 +1,15 @@
+#Course: CST-205
+#TItle: Main Functionality
+#Abstract: This Flask application provides a web interface where users can enter a city name to receive current weather 
+# information and a relevant image. It integrates with the OpenWeatherAPI to fetch weather data and Unsplash to
+# obtain images. The application features a random city selection option and processes the weather data to determine 
+# an appropriate color filter for the image based on the temperature. The image is then encoded in base64 format for 
+# easy embedding in HTML. Additionally, the app converts Unix timestamps to local times and displays a 24-hour weather 
+# forecast. The main functionalities are defined in routes that handle the home page and process both GET and POST requests.
+#Authors: Sabino Galindo and Cesar Garcia
+#Date: 05/16/2024
+#Sabino Worked on Filters, importing the weather API and some parts of def Home
+#Cesar worked on Unsplash API, Converting time, encoding images and the rst of def Home
 from flask import Flask, render_template, request
 import requests
 from PIL import Image
